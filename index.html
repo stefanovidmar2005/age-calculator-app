@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- stylesheet -->
+
+    <link rel="stylesheet" href="CSS/style.css" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <!-- script  -->
+
+    <script src="JS/app.js" defer></script>
+    <title>Frontend Mentor | Age calculator app</title>
+  </head>
+  <body>
+    <main class="main">
+      <div class="container">
+        <div class="container__fields">
+          <div class="container__fields-group">
+            <label for="day">Day</label>
+            <input
+              name="day"
+              id="day"
+              type="text"
+              placeholder="DD"
+              class="container__fields-input"
+            />
+            <p class="validation-message"></p>
+          </div>
+          <div class="container__fields-group">
+            <label for="month">Month</label>
+            <input
+              name="month"
+              id="month"
+              type="text"
+              placeholder="MM"
+              class="container__fields-input"
+            />
+            <p class="validation-message"></p>
+          </div>
+          <div class="container__fields-group">
+            <label for="year">Year</label>
+            <input
+              id="year"
+              name="year"
+              type="text"
+              placeholder="YYYY"
+              class="container__fields-input"
+            />
+            <p class="validation-message"></p>
+          </div>
+        </div>
+        <div class="container__submit">
+          <div class="container__submit-seperator"></div>
+          <button type="submit" class="container__submit-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="46"
+              height="44"
+              viewBox="0 0 46 44"
+            >
+              <g fill="none" stroke="#FFF" stroke-width="2">
+                <path
+                  d="M1 22.019C8.333 21.686 23 25.616 23 44M23 44V0M45 22.019C37.667 21.686 23 25.616 23 44"
+                />
+              </g>
+            </svg>
+          </button>
+        </div>
+        <div class="container__data">
+          <div class="container__data-group">
+            <h3 class="container__data-group-number">38</h3>
+            <h3 class="container__data-group-description">years</h3>
+          </div>
+          <div class="container__data-group">
+            <h3 class="container__data-group-number">3</h3>
+            <h3 class="container__data-group-description">months</h3>
+          </div>
+          <div class="container__data-group">
+            <h3 class="container__data-group-number">26</h3>
+            <h3 class="container__data-group-description">days</h3>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

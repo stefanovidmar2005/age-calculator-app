@@ -1,0 +1,22 @@
+@import "../variables.scss";
+
+.container__data {
+  display: flex;
+  flex-direction: column;
+
+  &-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    &-number {
+      color: $primary-purple-clr;
+      font-size: 5rem;
+      font-weight: $fw-800;
+    }
+    &-description {
+      color: $neutral-900;
+      font-size: 5rem;
+      font-weight: $fw-800;
+    }
+  }
+}

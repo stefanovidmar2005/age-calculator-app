@@ -1,0 +1,35 @@
+@import "../variables.scss";
+
+.container__submit {
+  position: relative;
+  margin-bottom: 5rem;
+  &-seperator {
+    height: 2px;
+    width: 100%;
+    background-color: $neutral-200;
+  }
+  &-btn {
+    position: absolute;
+    top: -20px;
+    right: 120px;
+    background-color: $primary-purple-clr;
+    border: 0;
+    border-radius: 100vw;
+    padding: 1rem;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+    &:hover {
+      background-color: $neutral-900;
+    }
+    svg {
+      height: 40px;
+      width: 40px;
+      object-fit: contain;
+    }
+  }
+}

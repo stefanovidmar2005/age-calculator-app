@@ -1,0 +1,17 @@
+@import "variables";
+
+body {
+  background-color: $neutral-200;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  padding-top: 8rem;
+  @import "./component/input-fields";
+  @import "./component/submit";
+  @import "./component/display-age-data";
+}
