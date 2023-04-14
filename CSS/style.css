@@ -81,6 +81,10 @@ select {
     scroll-behavior: auto !important;
   }
 }
+.error {
+  color: hsl(0deg, 100%, 67%) !important;
+}
+
 body {
   background-color: hsl(0deg, 0%, 94%);
   height: 100vh;
@@ -101,18 +105,19 @@ body {
   border-bottom-right-radius: 24%;
   padding: 4rem 2rem;
   overflow: hidden;
-  width: 31.5rem;
+  max-width: 100rem;
 }
 .main .container__fields {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.7rem;
+  justify-content: space-between;
   margin-bottom: 4rem;
 }
 .main .container__fields-group {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  gap: 0.5rem;
 }
 .main .container__fields-group label {
   text-transform: uppercase;
@@ -121,17 +126,35 @@ body {
   font-size: 1.3rem;
   margin-bottom: 0.75rem;
 }
+.main .container__fields-group .validation-message {
+  color: hsl(0deg, 100%, 67%);
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s ease-in-out;
+  height: 3rem;
+  width: 10rem;
+}
+.main .container__fields-group .validation-message-hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
 .main .container__fields-input {
   width: 8rem;
   padding: 0.5rem;
   border: 1px solid hsl(0deg, 0%, 86%);
-  border-radius: 10px;
+  border-radius: 7px;
   font-size: 2.5rem;
   transition: outline 0.3s;
   outline: 1px solid transparent;
 }
 .main .container__fields-input:focus {
   outline: 1px solid hsl(259deg, 100%, 65%);
+}
+.main .container__fields .form__btn {
+  display: none;
 }
 .main .container__submit {
   position: relative;
@@ -145,7 +168,7 @@ body {
 .main .container__submit-btn {
   position: absolute;
   top: -20px;
-  right: 116px;
+  right: 150px;
   background-color: hsl(259deg, 100%, 65%);
   border: 0;
   border-radius: 100vw;
