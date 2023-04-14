@@ -26,6 +26,12 @@ const MONTH30 = 30;
 const MONTH31 = 31;
 const MONTH28 = 28;
 const CURRENT_YEAR = new Date().getFullYear();
+const CURRENT_MONTH = new Date().getMonth() + 1;
+const CURRENT_DAY = new Date().getDate();
+// DATA TO BE DISPLAY TRHOUG THESE SELECTIONS
+const YearData = document.querySelector(".years");
+const MonthData = document.querySelector(".months");
+const DayData = document.querySelector(".days");
 
 const ALL_MONTHS = [
   "January",
@@ -55,11 +61,13 @@ const MONTHS_31_DAYS = [
 ];
 const EXCEPTION_MONTH = ["February"];
 
+// making sure once the page loads all the alert messages have a hidden class
 alertMessage.forEach((message) =>
   message.classList.add("validation-message-hidden")
 );
 
 // Event Handlers
+// TODO: find a way to remove the error messages and labels once the user types in any of the input fields or meets the conditions?
 const submitForm = (e) => {
   e.preventDefault();
   // helper function for validation
@@ -79,7 +87,7 @@ const submitForm = (e) => {
   };
   const displayErrorOnInput = (...inputs) => {
     inputs.forEach((input) => {
-      input.style.outline = "1px solid hsl(0, 100%, 67%)";
+      input.classList.add("outline-error");
     });
   };
   const displayErrorOnLabel = () => {
@@ -131,7 +139,29 @@ const submitForm = (e) => {
         displayErrorOnInput(inputDay, inputMonth, inputYear);
         displayErrorOnLabel();
       }
+    } else if (
+      allPositives(day, month, year) &&
+      validInputs(day, month, year) &&
+      day < MAX_DAYS &&
+      month < MAX_MONTHS &&
+      year < CURRENT_YEAR
+    ) {
+      removeErrorMessages(alertMessage, inputDay, inputMonth, inputYear);
+      YearData.textContent = CURRENT_YEAR - year;
+      MonthData.textContent = CURRENT_MONTH - month;
+      DayData.textContent = CURRENT_DAY - day;
     }
+  };
+  const removeErrorMessages = (alertMsg, ...inputs) => {
+    allLabels.forEach((label) => label.classList.remove("error"));
+    alertMsg.forEach((message) => {
+      message.textContent = "";
+      message.classList.remove("validation-message-hidden");
+    });
+    inputs.forEach((input) => {
+      input.classList.remove("outline-error");
+      input.value = "";
+    });
   };
   const target = e.target.closest(".container__submit-btn");
   if (!target) return;
@@ -142,6 +172,7 @@ const submitForm = (e) => {
     displayErrorOnInput(inputDay, inputMonth, inputYear);
     errorMessageForInputsGreatedThan(alertMessage);
   }
+
   if (!allPositives(day, month, year) || !validInputs(day, month, year)) {
     displayErrorMessage(alertMessage, "This field is required.");
     displayErrorOnInput(inputDay, inputMonth, inputYear);
@@ -149,11 +180,6 @@ const submitForm = (e) => {
   }
   checkMonth(month);
 };
-// TODO: find a way to remove the error messages and labels once the user types in any of the input fields or meets the conditions?
-const clearErrorMessages = () => {
-  allInputs.forEach((input) => {
-    input.style.outline = "0px solid hsl(0, 100%, 67%)";
-  });
-};
+
 // Event Listeners
 submitButton.addEventListener("click", submitForm);

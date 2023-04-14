@@ -85,6 +85,10 @@ select {
   color: hsl(0deg, 100%, 67%) !important;
 }
 
+.outline-error {
+  outline: 1px solid hsl(0deg, 100%, 67%) !important;
+}
+
 body {
   background-color: hsl(0deg, 0%, 94%);
   height: 100vh;
