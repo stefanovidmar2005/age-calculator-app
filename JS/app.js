@@ -22,7 +22,38 @@ const allLabels = [...document.querySelectorAll("label")];
 const alertMessage = document.querySelectorAll(".validation-message");
 const MAX_MONTHS = 12;
 const MAX_DAYS = 31;
+const MONTH30 = 30;
+const MONTH31 = 31;
+const MONTH28 = 28;
 const CURRENT_YEAR = new Date().getFullYear();
+
+const ALL_MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const MONTHS_30_DAYS = ["April", "June", "September", "November"];
+
+const MONTHS_31_DAYS = [
+  "January",
+  "March",
+  "May",
+  "July",
+  "August",
+  "October",
+  "December",
+];
+const EXCEPTION_MONTH = ["February"];
 
 alertMessage.forEach((message) =>
   message.classList.add("validation-message-hidden")
@@ -40,10 +71,10 @@ const submitForm = (e) => {
     return inputs.every((input) => input > 0);
   };
 
-  const displayErrorMessage = (alertMsg) => {
+  const displayErrorMessage = (alertMsg, messageContent) => {
     alertMsg.forEach((message) => {
       message.classList.remove("validation-message-hidden");
-      message.textContent = "This field is required.";
+      message.textContent = messageContent;
     });
   };
   const displayErrorOnInput = (...inputs) => {
@@ -65,6 +96,43 @@ const submitForm = (e) => {
     });
   };
 
+  const checkMonth = (monthIndex) => {
+    // getting the month Index so we can extract the month name from the array of months
+    const monthName = ALL_MONTHS[monthIndex - 1];
+    // first checking wether the month inserted matches a month from the months that have 30 days in them
+    if (MONTHS_30_DAYS.includes(monthName)) {
+      if (day > MONTH30) {
+        displayErrorMessage(
+          alertMessage,
+          "Please enter a day less than or equal 30"
+        );
+        displayErrorOnInput(inputDay, inputMonth, inputYear);
+        displayErrorOnLabel();
+      }
+    }
+
+    if (MONTHS_31_DAYS.includes(monthName)) {
+      if (day > MONTH31) {
+        displayErrorMessage(
+          alertMessage,
+          "Please enter a day less than or equal 31"
+        );
+        displayErrorOnInput(inputDay, inputMonth, inputYear);
+        displayErrorOnLabel();
+      }
+    }
+
+    if (EXCEPTION_MONTH.includes(monthName)) {
+      if (day > MONTH28) {
+        displayErrorMessage(
+          alertMessage,
+          "Please enter a day less than or equal 28"
+        );
+        displayErrorOnInput(inputDay, inputMonth, inputYear);
+        displayErrorOnLabel();
+      }
+    }
+  };
   const target = e.target.closest(".container__submit-btn");
   if (!target) return;
   const day = +inputDay.value;
@@ -75,10 +143,11 @@ const submitForm = (e) => {
     errorMessageForInputsGreatedThan(alertMessage);
   }
   if (!allPositives(day, month, year) || !validInputs(day, month, year)) {
-    displayErrorMessage(alertMessage);
+    displayErrorMessage(alertMessage, "This field is required.");
     displayErrorOnInput(inputDay, inputMonth, inputYear);
     displayErrorOnLabel();
   }
+  checkMonth(month);
 };
 // TODO: find a way to remove the error messages and labels once the user types in any of the input fields or meets the conditions?
 const clearErrorMessages = () => {
