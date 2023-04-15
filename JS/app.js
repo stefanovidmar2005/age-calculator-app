@@ -25,9 +25,12 @@ const MAX_DAYS = 31;
 const MONTH30 = 30;
 const MONTH31 = 31;
 const MONTH28 = 28;
-const CURRENT_YEAR = new Date().getFullYear();
-const CURRENT_MONTH = new Date().getMonth() + 1;
-const CURRENT_DAY = new Date().getDate();
+
+const CURRENT_DATE = new Date();
+const CURRENT_YEAR = CURRENT_DATE.getFullYear();
+
+const CURRENT_MONTH = CURRENT_DATE.getMonth() + 1;
+const CURRENT_DAY = CURRENT_DATE.getDate();
 // DATA TO BE DISPLAY TRHOUG THESE SELECTIONS
 const YearData = document.querySelector(".years");
 const MonthData = document.querySelector(".months");
@@ -162,12 +165,33 @@ const submitForm = () => {
       validInputs(day, month, year) &&
       day < MAX_DAYS &&
       month < MAX_MONTHS &&
-      year < CURRENT_YEAR
+      year <= CURRENT_YEAR
     ) {
       removeErrorMessages(alertMessage, inputDay, inputMonth, inputYear);
-      YearData.textContent = CURRENT_YEAR - year;
-      MonthData.textContent = CURRENT_MONTH - month;
-      DayData.textContent = CURRENT_DAY - day;
+      const calcAge = function (birthday) {
+        let birthdate = new Date(birthday);
+        console.log(birthdate);
+        let YEARS = CURRENT_DATE.getFullYear() - birthdate.getFullYear();
+        let MONTHS = CURRENT_DATE.getMonth() - birthdate.getMonth();
+        let DAYS = CURRENT_DATE.getDate() - birthdate.getDate();
+        // If the birthdate month and day are after the current month and day,
+        // subtract one year from the age
+
+        if (MONTHS < 0 || (MONTHS === 0 && DAYS < 0)) {
+          YEARS--;
+          if (MONTHS === 0) {
+            MONTHS = 11;
+          } else {
+            MONTHS = 12 + MONTHS;
+          }
+          DAYS = 30 + DAYS;
+        }
+
+        YearData.textContent = YEARS;
+        MonthData.textContent = MONTHS;
+        DayData.textContent = DAYS;
+      };
+      calcAge(`${month}/${day}/${year}`);
     }
   };
   const day = +inputDay.value;
