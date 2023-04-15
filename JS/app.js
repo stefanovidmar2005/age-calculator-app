@@ -190,3 +190,8 @@ const submitForm = (e) => {
 
 // Event Listeners
 submitButton.addEventListener("click", submitForm);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    submitForm();
+  }
+});
