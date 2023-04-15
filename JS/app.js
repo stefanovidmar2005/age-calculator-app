@@ -8,7 +8,7 @@
 //   - The month number is not between 1-12 ✅
 //   - The year is in the future ✅
 //   - The date is invalid e.g. 31/04/1991 (there are 30 days in April) ✅
-// - View the optimal layout for the interface depending on their device's screen size
+// - View the optimal layout for the interface depending on their device's screen size ✅
 // - See hover and focus states for all interactive elements on the page ✅
 
 // Selections
@@ -60,6 +60,8 @@ const MONTHS_31_DAYS = [
   "December",
 ];
 const EXCEPTION_MONTH = ["February"];
+
+// TODO: still a bug in the calculation of the age its returning negative months in sum scenarios?
 
 // making sure once the page loads all the alert messages have a hidden class
 alertMessage.forEach((message) =>
