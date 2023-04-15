@@ -68,8 +68,7 @@ alertMessage.forEach((message) =>
 
 // Event Handlers
 // TODO: find a way to remove the error messages and labels once the user types in any of the input fields or meets the conditions?
-const submitForm = (e) => {
-  e.preventDefault();
+const submitForm = () => {
   // helper function for validation
   const validInputs = (...inputs) => {
     return inputs.every((inp) => Number.isFinite(inp));
@@ -169,9 +168,6 @@ const submitForm = (e) => {
       DayData.textContent = CURRENT_DAY - day;
     }
   };
-
-  const target = e.target.closest(".container__submit-btn");
-  if (!target) return;
   const day = +inputDay.value;
   const month = +inputMonth.value;
   const year = +inputYear.value;
@@ -190,7 +186,7 @@ const submitForm = (e) => {
 
 // Event Listeners
 submitButton.addEventListener("click", submitForm);
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     submitForm();
   }
