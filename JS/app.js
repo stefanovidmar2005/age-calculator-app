@@ -1,15 +1,15 @@
 "use strict";
 
 // TODO:
-// - View an age in years, months, and days after submitting a valid date through the form
+// - View an age in years, months, and days after submitting a valid date through the form ✅
 // - Receive validation errors if:
 //   - Any field is empty when the form is submitted ✅
 //   - The day number is not between 1-31 ✅
 //   - The month number is not between 1-12 ✅
 //   - The year is in the future ✅
-//   - The date is invalid e.g. 31/04/1991 (there are 30 days in April)
+//   - The date is invalid e.g. 31/04/1991 (there are 30 days in April) ✅
 // - View the optimal layout for the interface depending on their device's screen size
-// - See hover and focus states for all interactive elements on the page
+// - See hover and focus states for all interactive elements on the page ✅
 
 // Selections
 const submitButton = document.querySelector(".container__submit-btn");
@@ -104,6 +104,18 @@ const submitForm = (e) => {
     });
   };
 
+  const removeErrorMessages = (alertMsg, ...inputs) => {
+    allLabels.forEach((label) => label.classList.remove("error"));
+    alertMsg.forEach((message) => {
+      message.textContent = "";
+      message.classList.remove("validation-message-hidden");
+    });
+    inputs.forEach((input) => {
+      input.classList.remove("outline-error");
+      input.value = "";
+    });
+  };
+
   const checkMonth = (monthIndex) => {
     // getting the month Index so we can extract the month name from the array of months
     const monthName = ALL_MONTHS[monthIndex - 1];
@@ -116,6 +128,7 @@ const submitForm = (e) => {
         );
         displayErrorOnInput(inputDay, inputMonth, inputYear);
         displayErrorOnLabel();
+        return;
       }
     }
 
@@ -127,6 +140,7 @@ const submitForm = (e) => {
         );
         displayErrorOnInput(inputDay, inputMonth, inputYear);
         displayErrorOnLabel();
+        return;
       }
     }
 
@@ -138,8 +152,11 @@ const submitForm = (e) => {
         );
         displayErrorOnInput(inputDay, inputMonth, inputYear);
         displayErrorOnLabel();
+        return;
       }
-    } else if (
+    }
+
+    if (
       allPositives(day, month, year) &&
       validInputs(day, month, year) &&
       day < MAX_DAYS &&
@@ -152,17 +169,7 @@ const submitForm = (e) => {
       DayData.textContent = CURRENT_DAY - day;
     }
   };
-  const removeErrorMessages = (alertMsg, ...inputs) => {
-    allLabels.forEach((label) => label.classList.remove("error"));
-    alertMsg.forEach((message) => {
-      message.textContent = "";
-      message.classList.remove("validation-message-hidden");
-    });
-    inputs.forEach((input) => {
-      input.classList.remove("outline-error");
-      input.value = "";
-    });
-  };
+
   const target = e.target.closest(".container__submit-btn");
   if (!target) return;
   const day = +inputDay.value;
